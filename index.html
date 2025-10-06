@@ -2,147 +2,271 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Quantum Campus Platform</title>
-    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Campus Network</title>
     <style>
-        /* Космический дизайн с неоновыми элементами */
-        body { 
-            margin: 0; 
-            background: #0a0a0a;
-            color: #00ff88;
-            font-family: 'Courier New', monospace;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
         }
-        #blockchain-canvas { 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            z-index: -1; 
+
+        body {
+            background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #16213e);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
-        .dashboard {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            padding: 30px;
+
+        .particles-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
         }
-        .module {
-            background: rgba(0, 255, 136, 0.1);
-            border: 1px solid #00ff88;
-            border-radius: 15px;
-            padding: 20px;
+
+        .header {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
             backdrop-filter: blur(10px);
         }
-        .neon-text {
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #00ff88;
             text-shadow: 0 0 10px #00ff88;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #00ff88;
+        }
+
+        .contact-btn {
+            background: linear-gradient(45deg, #00ff88, #00cc66);
+            color: #000;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.4);
+        }
+
+        .hero {
+            margin-top: 100px;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #00ff88, #00ccff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            color: #cccccc;
+        }
+
+        .features {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            color: #00ff88;
+            margin-bottom: 1rem;
+        }
+
+        .footer {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
         }
     </style>
 </head>
 <body>
-    <canvas id="blockchain-canvas"></canvas>
+    <canvas class="particles-bg" id="particles"></canvas>
     
-    <div class="dashboard">
-        <div class="module">
-            <h3 class="neon-text">AI Аналитика</h3>
-            <div id="ai-chart"></div>
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">Quantum Campus</div>
+            <nav class="nav-links">
+                <a href="#about">О проекте</a>
+                <a href="#features">Возможности</a>
+                <a href="#contact">Контакты</a>
+            </nav>
+            <a href="https://t.me/ARMFFSOFTVIP" class="contact-btn">Contact in Telegram</a>
         </div>
-        <div class="module">
-            <h3 class="neon-text">Блокчейн транзакции</h3>
-            <div id="blockchain-data"></div>
+    </header>
+
+    <section class="hero">
+        <h1>Инновационная образовательная платформа</h1>
+        <p>Передовые технологии для современного образования. Искусственный интеллект, блокчейн и машинное обучение в одном решении.</p>
+        <a href="https://t.me/ARMFFSOFTVIP" class="contact-btn">Связаться через Telegram</a>
+    </section>
+
+    <section class="features">
+        <div class="feature-card">
+            <h3>AI Аналитика</h3>
+            <p>Система искусственного интеллекта анализирует успеваемость и предлагает персональные рекомендации</p>
         </div>
-        <div class="module">
-            <h3 class="neon-text">3D Визуализация</h3>
-            <div id="3d-container"></div>
+        <div class="feature-card">
+            <h3>Блокчейн безопасность</h3>
+            <p>Технология блокчейн обеспечивает защиту данных и прозрачность образовательного процесса</p>
         </div>
-    </div>
+        <div class="feature-card">
+            <h3>3D Визуализация</h3>
+            <p>Интерактивные 3D модели для лучшего понимания сложных концепций и теорий</p>
+        </div>
+        <div class="feature-card">
+            <h3>Облачные вычисления</h3>
+            <p>Мощные облачные серверы для обработки данных и сложных вычислений</p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>© 2024 Quantum Campus Network. Все права защищены.</p>
+        <p>По вопросам сотрудничества: <a href="https://t.me/ARMFFSOFTVIP" style="color: #00ff88;">Telegram @ARMFFSOFTVIP</a></p>
+    </footer>
 
     <script>
-        // Имитация блокчейна
-        class Blockchain {
+        // Частицы на фоне
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+        const particleCount = 100;
+
+        class Particle {
             constructor() {
-                this.chain = [];
-                this.createGenesisBlock();
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+                this.color = `hsl(${Math.random() * 360}, 50%, 50%)`;
             }
-            createGenesisBlock() {
-                this.chain.push({
-                    index: 1,
-                    timestamp: Date.now(),
-                    data: "Genesis Block",
-                    previousHash: "0",
-                    hash: this.generateHash(1, Date.now(), "Genesis Block", "0")
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let particle of particles) {
+                particle.update();
+                particle.draw();
+            }
+            requestAnimationFrame(animateParticles);
+        }
+
+        initParticles();
+        animateParticles();
+
+        // Адаптивность
+        window.addEventListener('resize', function() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Плавная прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
                 });
-            }
-            generateHash(index, timestamp, data, previousHash) {
-                return CryptoJS.SHA256(index + timestamp + data + previousHash).toString();
-            }
-        }
-
-        // 3D визуализация блокчейна
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('blockchain-canvas') });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-
-        // Создаем 3D блоки для каждого элемента блокчейна
-        const blockchain = new Blockchain();
-        const blocks = [];
-
-        for(let i = 0; i < 10; i++) {
-            const geometry = new THREE.BoxGeometry(2, 2, 2);
-            const material = new THREE.MeshBasicMaterial({ 
-                color: new THREE.Color(Math.random(), Math.random(), Math.random()),
-                wireframe: true 
             });
-            const block = new THREE.Mesh(geometry, material);
-            block.position.x = i * 3;
-            scene.add(block);
-            blocks.push(block);
-        }
-
-        camera.position.z = 20;
-
-        function animate() {
-            requestAnimationFrame(animate);
-            blocks.forEach((block, index) => {
-                block.rotation.x += 0.01;
-                block.rotation.y += 0.01;
-                block.position.y = Math.sin(Date.now() * 0.001 + index) * 2;
-            });
-            renderer.render(scene, camera);
-        }
-        animate();
-
-        // AI модуль для предсказаний
-        const aiPredictions = {
-            predict: function() {
-                const predictions = ["Рост на 15%", "Стабильность", "Волатильность"];
-                return predictions[Math.floor(Math.random() * predictions.length)];
-            }
-        };
-
-        // Обновляем данные в реальном времени
-        setInterval(() => {
-            document.getElementById('ai-chart').innerHTML = `
-                <p>Предсказание AI: ${aiPredictions.predict()}</p>
-                <p>Точность: ${(Math.random() * 100).toFixed(2)}%</p>
-            `;
-            
-            document.getElementById('blockchain-data').innerHTML = `
-                <p>Блоков в цепи: ${blockchain.chain.length}</p>
-                <p>Хэш последнего блока: ${blockchain.chain[blockchain.chain.length-1]?.hash.substring(0, 16)}...</p>
-            `;
-        }, 2000);
-
-        // Добавляем новые блоки каждые 5 секунд
-        setInterval(() => {
-            const newBlock = {
-                index: blockchain.chain.length + 1,
-                timestamp: Date.now(),
-                data: `Block ${blockchain.chain.length + 1} Data`,
-                previousHash: blockchain.chain[blockchain.chain.length-1].hash,
-                hash: "generated_hash_here"
-            };
-            blockchain.chain.push(newBlock);
-        }, 5000);
+        });
     </script>
 </body>
 </html>
